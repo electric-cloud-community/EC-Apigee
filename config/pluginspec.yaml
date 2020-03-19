@@ -1,0 +1,106 @@
+pluginInfo:
+  # This is default sample specification
+  # Feel free to change it
+  # Call flowpdk showdoc pluginspec to see the list of available fields and their description
+  pluginName: 'EC-Apigee'
+  version: '0.1.0'
+  description: 'Integrates with Apigee'
+  author: 'Shaohua Wen <swen@cloudbees.com>'
+  supportUrl: 'none'
+  category: 'Utilities'
+  shell: 'ec-perl'
+
+# REST-backed plugin configuration
+configuration:
+  checkConnection: false
+  parameters:
+  -
+    name: org_name
+    label: Organization
+    required: true
+    type: entry
+    documentation: The Organization Name
+  restConfigInfo:
+    checkConnectionUri: '/organizations/{{org_name}}/apiproducts'
+    endpointLabel: 'My REST Endpoint'
+    defaultEndpointValue: https://api.enterprise.apigee.com/v1
+    headers:
+      Accept: 'application/json'
+    authSchemes:
+      bearer:
+        passwordLabel: 'Bearer token'
+        description: 'Token to connect to...'
+      basic:
+        userNameLabel: 'Username'
+        passwordLabel: 'Password'
+        description: 'Username and password to connect to ...'
+#  customCheckConnection: true
+  hasProxySupport: true
+  hasDebugLevel: true
+
+procedures:
+-
+  name: 'Add API Product to Key'
+  description: 'This procedure Add API Product to Key'
+  hasConfig: true
+  shell: 'ec-perl'
+  parameters:
+  -
+    name: developer_email_or_id
+    documentation: Developer Email or ID
+    required: true
+    type: entry
+    label: Developer Email or ID
+    restParamInfo:
+      in: path
+  -
+    name: app_name
+    documentation: Application Name
+    required: true
+    type: entry
+    label: Application Name
+    restParamInfo:
+      in: path
+  -
+    name: consumer_key
+    documentation: Consumer Key
+    required: true
+    type: entry
+    label: Consumer Key
+    restParamInfo:
+      in: path
+  -
+    name: apiProducts
+    documentation: API Products
+    required: true
+    type: textarea
+    label: API Products
+    value: |
+      ["product_1", "product_2"]
+    restParamInfo:
+      in: body
+  -
+    name: attributes
+    documentation: Attributes
+    required: true
+    type: textarea
+    label: Attributes
+    value: |
+      [
+         {
+            "name":"my_key_attribute",
+            "value":"my_key_attribute_value"
+         }
+      ]
+    restParamInfo:
+      in: body
+  # Connects REST endpoint to the plugin procedure
+  outputParameters:
+  -
+    name: restResult
+    description: Rest Call Result
+    isRestOutputParam: true
+  restProcedureInfo:
+    url: '/organizations/{{org_name}}/developers/{{developer_email_or_id}}/apps/{{app_name}}/keys/{{consumer_key}}'
+    methodName: 'addApiProductToKey'
+    httpMethod: 'POST'

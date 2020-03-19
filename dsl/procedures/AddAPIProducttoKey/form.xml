@@ -1,0 +1,60 @@
+<!--
+    This form is generated automatically from the parameters pluginspec.
+    Please not not edit this file manually as it will be regenerated.
+-->
+<editor>
+  <help>/commander/pages/@PLUGIN_NAME@/help?s=Administration&amp;ss=Plugins#AddAPIProducttoKey</help>
+  <formElement>
+    <type>entry</type>
+    <property>config</property>
+    <configuration>1</configuration>
+    <propertyReference>/plugins/@PLUGIN_NAME@/project/ec_plugin_cfgs</propertyReference>
+    <required>1</required>
+    <documentation>Previously defined configuration for the plugin</documentation>
+    <label>Configuration Name:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>developer_email_or_id</property>
+    <required>1</required>
+    <documentation>Developer Email or ID</documentation>
+    <label>Developer Email or ID:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>app_name</property>
+    <required>1</required>
+    <documentation>Application Name</documentation>
+    <label>Application Name:</label>
+  </formElement>
+  <formElement>
+    <type>entry</type>
+    <property>consumer_key</property>
+    <required>1</required>
+    <documentation>Consumer Key</documentation>
+    <label>Consumer Key:</label>
+  </formElement>
+  <formElement>
+    <type>textarea</type>
+    <property>apiProducts</property>
+    <required>1</required>
+    <documentation>API Products</documentation>
+    <label>API Products:</label>
+    <value>["product_1", "product_2"]
+</value>
+  </formElement>
+  <formElement>
+    <type>textarea</type>
+    <property>attributes</property>
+    <required>1</required>
+    <documentation>Attributes</documentation>
+    <label>Attributes:</label>
+    <value>[
+   {
+      "name":"my_key_attribute",
+      "value":"my_key_attribute_value"
+   }
+]
+</value>
+  </formElement>
+</editor>
